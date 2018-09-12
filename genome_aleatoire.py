@@ -43,6 +43,7 @@ def reads_to_kmers_graph(length_genom, length_reads,number_reads,length_kmers) :
             G.add_edge(kmers1,kmers2)
     print(G.graph)
     print(G.is_connected())    
-
+    print(G.graph)
+    print(G.eulerian_cycle())
 if __name__ == '__main__': 
-    reads_to_kmers_graph(10,5,10,4)
+    reads_to_kmers_graph(10,8,6,5)
