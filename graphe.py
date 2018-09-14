@@ -4,18 +4,19 @@ import copy
 import random 
 class Graph() :
     def __init__(self) :
-        self.list_vertex=[]
         self.graph={}
-        self.list_edge=[]
+        self.number_edge=0
 
         ##dico de liste ex : {0 : [[1,2,3],[2,4,5]]}
     def add_edge(self,vertex1,vertex2) : 
         if vertex1 in self.graph :
             if vertex2 not in self.graph[vertex1][1]  :
                 ##arc sortant pour vertex1
-                self.graph[vertex1][1].append(vertex2)  
+                self.graph[vertex1][1].append(vertex2)
+                self.number_edge=self.number_edge+1  
         else :
             self.graph[vertex1]=[[],[vertex2]]
+            self.number_edge=self.number_edge+1
 
         if vertex2 in self.graph :
             if vertex1 not in self.graph[vertex2][0]  :
@@ -24,8 +25,6 @@ class Graph() :
         else :
             self.graph[vertex2]=[[vertex1],[]]
 
-        if ((vertex1,vertex2)) not in self.list_edge :
-            self.list_edge.append((vertex1,vertex2))
 
 
 
@@ -38,8 +37,6 @@ class Graph() :
         #print("GENOME a la fin :", genome[:-len(first)])
         print("TAILLE genome fin :",len(genome[:-len(first)]))
         return genome[:-len(first)]
-
-
         
     def is_connected(self) :
         #utilisation algo BFS ici
@@ -97,7 +94,7 @@ class Graph() :
         #si notre cycle n'est pas eulérien
         ##notre : peut etre garder en mémoire que le nb d'arcs
         #for k in range(0,10) :
-        while len(edge_visited)!=len(self.list_edge) :
+        while len(edge_visited)!=self.number_edge :
             #je regarde mes arcs que j'ai visité
             found=False
             for tuples in edge_visited :
@@ -141,8 +138,8 @@ class Graph() :
         return self.build_genome(edge_visited)
         
 
-#g1 = Graph()
-#g1.add_edge('0', '1')
+# g1 = Graph()
+# g1.add_edge('0', '1')
 # g1.add_edge('1', '3')
 # g1.add_edge('3', '4')
 # g1.add_edge('4', '0')
@@ -152,6 +149,8 @@ class Graph() :
 # g1.add_edge('5', '6')
 # g1.add_edge('6', '4')
 
+
 # print(g1.graph)
+# print(g1.number_edge)
 # print(g1.is_connected())
 # print(g1.eulerian_cycle())

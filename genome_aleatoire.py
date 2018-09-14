@@ -32,18 +32,15 @@ def reads_to_kmers_graph(length_genom, length_reads,number_reads,length_kmers) :
     G=graphe.Graph()
     genome,list_reads=random_reads(length_genom, length_reads,number_reads)
     for read in list_reads :
-        #print("read :",read)
         for i in range(0,len(read)-length_kmers) :
             kmer=read[i:i+length_kmers] 
-            #print("kmer :",kmer)
             kmers1=kmer[:-1]
             kmers2=kmer[1:]
-            #print(kmers1, kmers2)
             G.add_edge(kmers1,kmers2)
     #print(G.graph)
     print(G.is_connected())    
     genome_result=G.eulerian_cycle()
-    print("TAILLE DU GRAPHE :",len(G.list_edge))
+    #print("TAILLE DU GRAPHE :",len(G.list_edge))
     return (genome,genome_result)
 
 
@@ -72,12 +69,10 @@ def areRotations(string1, string2):
     else:
         return 0
     
-
- 
 # This code is contributed by Bhavya Jain
-   
 if __name__ == '__main__': 
-    genome_start,genome_end=reads_to_kmers_graph(10000,100,5000,50)
+    #genome_start,genome_end=reads_to_kmers_graph(10000,100,5000,50)
+    genome_start,genome_end=reads_to_kmers_graph(10000,100,5000,20)
     if areRotations(genome_start, genome_end):
         print("Strings are rotations of each other")
     else:
