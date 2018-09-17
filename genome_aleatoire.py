@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # coding: utf-8
 
 import graphe 
@@ -13,17 +13,19 @@ def random_reads(length_genom, length_reads,number_reads) :
         length_genom=length_genom-1
     #genome="atata"
     list_reads=[]
-    list_pos=[]
+    list_pos=list(range(len(genome)))
+    #print(list_pos)
     while number_reads!=0 : 
-       random_number=random.randint(0,len(genome)-1)
-       if random_number not in list_pos :
-           if random_number+length_reads>=len(genome) :
-                read=genome[random_number:]+genome[0:length_reads-len(genome[random_number:])]
-           else :
-                read=genome[random_number:random_number+length_reads]
-           list_pos.append(random_number)
-           number_reads=number_reads-1
-           list_reads.append(read)
+        random_number=random.choice(list_pos)
+        list_pos.remove(random_number)
+       #if random_number not in list_pos :
+        if random_number+length_reads>=len(genome) :
+            read=genome[random_number:]+genome[0:length_reads-len(genome[random_number:])]
+        else :
+            read=genome[random_number:random_number+length_reads]
+        #list_pos.append(random_number)
+        number_reads=number_reads-1
+        list_reads.append(read)
     #print("GENOME au debut :",genome)
     print("TAILLE GENOME :",len(genome))
     return(genome,list_reads)     
@@ -71,7 +73,8 @@ def areRotations(string1, string2):
     
 # This code is contributed by Bhavya Jain
 if __name__ == '__main__': 
-    #genome_start,genome_end=reads_to_kmers_graph(10000,100,5000,50)
+    #genome_start,genome_end=reads_to_kmers_graph(10000,100,5000,20)
+    #100000,100,50000,55
     genome_start,genome_end=reads_to_kmers_graph(10000,100,5000,20)
     if areRotations(genome_start, genome_end):
         print("Strings are rotations of each other")
