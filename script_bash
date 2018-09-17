@@ -1,0 +1,11 @@
+#!/bin/bash
+START=$(date +%s.%N)
+
+python3 genome_aleatoire.py
+
+TIME_JOB=$(date +%s.%N)
+
+DIFF=$(echo "$TIME_JOB - $START" | bc)
+
+echo $DIFF
+exit 0
