@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import graphe 
-import genom
+import genom_functions as genom
 import argparse
 
 
