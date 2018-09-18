@@ -4,23 +4,23 @@ import copy
 import random 
 class Graph() :
     """
-    L'initialisation et les méthodes qui s'appliquent sur un graphe sont regroupés ici. 
-    Le graphe est sous forme d'un dictionnaire avec comme clé un sommet et comme définitions 2 listes qui contiennent les arcs entrants et sortants (le nom des sommets).
+    Initialization of a graph and its methods are regrouped here.
+    The graph is in the form of a dictionary with a vertex as the key and as 2 lists that contain the incoming and outgoing arcs (the name of the vertices).
     """
     def __init__(self) :
         """
-        Initialisation de la classe
+        Initialization of the class
         """
         self.graph={}
         self.number_edge=0
 
     def add_edge(self,vertex1,vertex2) : 
         """
-        Cette méthode permet d'ajouter un sommet dans un graphe
+        This method allows you to add a vertex in a graph
         """
         if vertex1 in self.graph :
             if vertex2 not in self.graph[vertex1][1]  :
-                # arc sortant pour vertex1
+                # outgoing arc for vertex1
                 self.graph[vertex1][1].append(vertex2)
                 self.number_edge=self.number_edge+1  
         else :
@@ -29,7 +29,7 @@ class Graph() :
 
         if vertex2 in self.graph :
             if vertex1 not in self.graph[vertex2][0]  :
-                # arc entrant pour vertex2
+                # incoming arc for vertex2
                 self.graph[vertex2][0].append(vertex1)  
         else :
             self.graph[vertex2]=[[vertex1],[]]
@@ -37,22 +37,21 @@ class Graph() :
 
     def build_genome(self,edge_path) :
         """
-        Cette méthode permet à partir d'une liste de sommet de reconstituer le génome
+        This method allows from a vertex list to reconstruct the genome
         """
-        first=edge_path[0][0]
-        genome=first
+        genome=""
         for all_tuples in edge_path :
-            genome=genome+all_tuples[1][-1:]
-        print("TAILLE genome fin :",len(genome[:-len(first)]))
-        return genome[:-len(first)]
+            genome=genome+all_tuples[1][:1]
+        print("TAILLE genome fin :",len(genome))
+        return genome
         
     def is_connected(self) :
         """
-        Cette méthode permet de vérifier que le graphe est connexe. L'algorithme utilisé ici est un algorithme BFS (recherche en largeur)
+        This method verifies that the graph is connected. The algorithm used here is a DFS algorithm (in-depth search)
         """
-        vertex_visited=[list(self.graph.keys())[0]] 
-        # je prends un sommet au hasard (je prend la 1ere clé de la liste des clés)
-        vertex_processing= copy.copy(self.graph[vertex_visited[0]][1])
+        vertex_visited=[]
+        # I take a vertex at random (I take the first key of the list of keys)
+        vertex_processing= copy.copy(self.graph[list(self.graph.keys())[0]][1])
         while vertex_processing :
             v=vertex_processing.pop()
             if v not in vertex_visited :
@@ -65,23 +64,23 @@ class Graph() :
     
     def making_cycle(self,start,end,edge_visited) :
         """
-        Cette méthode permet de recherche un cycle à partir d'un sommet de départ et un sommet adjacent au sommet de départ (end).
+        This method searches for a cycle from a starting vertex and a vertex adjacent to the starting vertex (end).
         """
         keep_going=True
         while end!=start and keep_going==True :
             random_path=random.randint(0,len(self.graph[end][1])-1)
-            # recherche d'un potentiel arc qui n'est pas connu
+            # search for a potential arc that is not explored
             new_end=self.graph[end][1][random_path]
             while ((end,new_end)) in edge_visited :
                 random_path=random.randint(0,len(self.graph[end][1])-1)
                 new_end=self.graph[end][1][random_path]
             edge_visited.append((end,new_end))
             end=new_end
-            # si on est revenu à notre sommet de départ (donc nous avons fait un cycle)
+            # if we went back to our starting point (so we cycled)
             if start==end :
                 keep_going=False
                 for possible_next_step in self.graph[start][1] :
-                    # s'il existe un autre arc adjacent au sommet de départ que l'on a pas visité
+                    # if there is another arc adjacent to the starting vertex that we have not visited
                     if ((start,possible_next_step) not in edge_visited) :
                         end=possible_next_step
                         edge_visited.append((start,end))
@@ -90,29 +89,29 @@ class Graph() :
             
     def eulerian_cycle(self) : 
         """
-        Cette méthode permet de voir s'il existe un cycle eulérian ou non, et s'il existe, renvoit le cycle d'arc correspondant au cycle eulérian.
+        This method makes it possible to see if there is an Eulerian cycle or not, and if it exists, returns the cycle of arc corresponding to the Eulerian cycle.
         """
-        # vérification que le nombre d'arc entrant = nombre d'arc sortant pour chaque sommet
+        # check that the number of incoming arc = number of outgoing arc for each vertex
         for elem in self.graph:
             edge_in=self.graph[elem][0]
             edge_out=self.graph[elem][1]
             if len(edge_in)!=len(edge_out):
-                print("ERREUR : CE GRAPHE NE CONTIENT PAS DE CYCLE EULERIAN")
+                print("ERREUR : THIS GRAPH DOES NOT CONTAIN AN EULERIAN CYCLE")
                 exit()
 
-        # recherche du cycle eulerian
+        # research of the eulerian cycle
         start=list(self.graph.keys())[0]
         random_path=random.randint(0,len(self.graph[start][1])-1 )
         end=self.graph[start][1][random_path]
         edge_visited=[(start,end)]
         edge_visited=self.making_cycle(start,end,edge_visited)
 
-        # si notre cycle que l'on a trouvé n'est pas le cycle eulérien
+        # if our cycle that we found is not the Eulerian cycle
         while len(edge_visited)!=self.number_edge :
-            # je regarde mes arcs que j'ai visité
+            # I look at my arches that I visited
             found=False
             for tuples in edge_visited :
-                # je regarde pour chaque sommet que j'ai traverse avec mes arcs s'ils ont un autre chemin
+                # I look for each vertex that I crossed through with my arches if they have another path
                 for vertex in self.graph[tuples[0]][1] :
                     if ((tuples[0],vertex)) not in edge_visited :
                         # si oui : il devient mon nouveau sommet de départ
@@ -125,7 +124,7 @@ class Graph() :
             edge_visited_tmp=[]
             i=0
             edge_found=False
-            # pour reformer un cycle avec comme sommet de départ notre nouveau sommet, nous devons rechercher l'arc correspondant à notre nouveau sommet
+            # to reform a cycle with our new vertex as our starting point, we need to look for the arc corresponding to our new peak
             for edge in edge_visited :
                 if edge[0]==start :
                     edge_found=True
@@ -137,11 +136,11 @@ class Graph() :
             for j in range(0,i) :
                 edge_visited_tmp.append(edge_visited[j])
 
-            # nouvelle liste d'arc avec comme 1er arc notre nouveau sommet de départ
+            # new bow list with as 1st bow our new starting vertex
             edge_visited=edge_visited_tmp
             start=edge_visited[len(edge_visited)-1][1]
 
-            # recherche d'un sommet adjacent qui n'est pas déjà visité (donc un nouveau chemin d'arc que nous pouvons explorer)
+            # search for an adjacent vertex that is not already visited (so a new arc path that we can explore)
             for potential_end in self.graph[start][1] :
                 if ((start,potential_end)) not in edge_visited :
                     end = potential_end

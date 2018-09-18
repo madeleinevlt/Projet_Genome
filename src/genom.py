@@ -18,8 +18,20 @@ def create_genom(length_genom) :
         length_genom=length_genom-1
     return genom
 
-#def genom_from_fasta(path) :
-#    with open(path)
+def genom_from_fasta(path,length_reads) :
+    """
+    Function which read a fasta file and return the genom
+    """
+    genom=""
+    with open(path,"r") as fillin :
+        for line in fillin :
+            if line[0]!=">" :
+                genom=genom+line
+
+    if length_reads>len(genom) :
+        print("The length of reads is higher than the length of the genom in ",path)
+        exit()
+    return genom
 
 def random_reads(genom,length_reads,number_reads) :
     """
@@ -29,6 +41,9 @@ def random_reads(genom,length_reads,number_reads) :
     """
     list_reads=[]
     list_pos=list(range(len(genom)))
+    if number_reads > len(list_pos):
+        print("The number of reads is too high")
+        exit()
     while number_reads!=0 : 
         random_number=random.choice(list_pos)
         list_pos.remove(random_number)
@@ -47,6 +62,8 @@ def reads_to_kmers_graph(l_genom, length_reads,number_reads,length_kmers) :
     G=graphe.Graph()
     if type(l_genom)==int :
         genom=create_genom(l_genom)
+    else :
+        genom=genom_from_fasta(l_genom,length_reads)    
     list_reads=random_reads(genom, length_reads,number_reads)
     for read in list_reads :
         for i in range(0,len(read)-length_kmers) :
@@ -72,6 +89,5 @@ def areRotations(genom1, genom2):
         return False
     
 
-#100000,100,50000,55
 
 
