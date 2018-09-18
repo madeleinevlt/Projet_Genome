@@ -42,7 +42,7 @@ class Graph() :
         genome=""
         for all_tuples in edge_path :
             genome=genome+all_tuples[1][:1]
-        print("TAILLE genome fin :",len(genome))
+        print("LENGTH OF GENOM BUILT :",len(genome))
         return genome
         
     def is_connected(self) :

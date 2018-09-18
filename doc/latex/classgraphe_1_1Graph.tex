@@ -1,0 +1,91 @@
+\hypertarget{classgraphe_1_1Graph}{}\section{graphe.\+Graph Class Reference}
+\label{classgraphe_1_1Graph}\index{graphe.\+Graph@{graphe.\+Graph}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classgraphe_1_1Graph_ac27b8aa0b0a84a72bc84af9e0a3c42cd}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classgraphe_1_1Graph_a944cef16d8feee30f98e8f3c0fc11f18}{add\+\_\+edge}} (self, vertex1, vertex2)
+\item 
+def \mbox{\hyperlink{classgraphe_1_1Graph_a0a1b1627da2894e30d9f65ba38304777}{build\+\_\+genome}} (self, edge\+\_\+path)
+\item 
+def \mbox{\hyperlink{classgraphe_1_1Graph_a6d0519dfdd5684ee06e5459703682e53}{is\+\_\+connected}} (self)
+\item 
+def \mbox{\hyperlink{classgraphe_1_1Graph_a9eae77f71af02fb458e27c17479dd326}{making\+\_\+cycle}} (self, start, end, edge\+\_\+visited)
+\item 
+def \mbox{\hyperlink{classgraphe_1_1Graph_a83fff8017d68d9414413f1a90873e1f8}{eulerian\+\_\+cycle}} (self)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgraphe_1_1Graph_a84295b5fb8ebcfdbb1eb77a34ba3c997}\label{classgraphe_1_1Graph_a84295b5fb8ebcfdbb1eb77a34ba3c997}} 
+{\bfseries graph}
+\item 
+\mbox{\Hypertarget{classgraphe_1_1Graph_aed4d4ffd6773c349d26bb14da0be476c}\label{classgraphe_1_1Graph_aed4d4ffd6773c349d26bb14da0be476c}} 
+{\bfseries number\+\_\+edge}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}Initialization of a graph and its methods are regrouped here.
+The graph is in the form of a dictionary with a vertex as the key and as 2 lists that contain the incoming and outgoing arcs (the name of the vertices).
+\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgraphe_1_1Graph_ac27b8aa0b0a84a72bc84af9e0a3c42cd}\label{classgraphe_1_1Graph_ac27b8aa0b0a84a72bc84af9e0a3c42cd}} 
+\index{graphe\+::\+Graph@{graphe\+::\+Graph}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!graphe\+::\+Graph@{graphe\+::\+Graph}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def graphe.\+Graph.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialization of the class
+\end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classgraphe_1_1Graph_a944cef16d8feee30f98e8f3c0fc11f18}\label{classgraphe_1_1Graph_a944cef16d8feee30f98e8f3c0fc11f18}} 
+\index{graphe\+::\+Graph@{graphe\+::\+Graph}!add\+\_\+edge@{add\+\_\+edge}}
+\index{add\+\_\+edge@{add\+\_\+edge}!graphe\+::\+Graph@{graphe\+::\+Graph}}
+\subsubsection{\texorpdfstring{add\+\_\+edge()}{add\_edge()}}
+{\footnotesize\ttfamily def graphe.\+Graph.\+add\+\_\+edge (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{vertex1,  }\item[{}]{vertex2 }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This method allows you to add a vertex in a graph
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classgraphe_1_1Graph_a0a1b1627da2894e30d9f65ba38304777}\label{classgraphe_1_1Graph_a0a1b1627da2894e30d9f65ba38304777}} 
+\index{graphe\+::\+Graph@{graphe\+::\+Graph}!build\+\_\+genome@{build\+\_\+genome}}
+\index{build\+\_\+genome@{build\+\_\+genome}!graphe\+::\+Graph@{graphe\+::\+Graph}}
+\subsubsection{\texorpdfstring{build\+\_\+genome()}{build\_genome()}}
+{\footnotesize\ttfamily def graphe.\+Graph.\+build\+\_\+genome (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{edge\+\_\+path }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This method allows from a vertex list to reconstruct the genome
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classgraphe_1_1Graph_a83fff8017d68d9414413f1a90873e1f8}\label{classgraphe_1_1Graph_a83fff8017d68d9414413f1a90873e1f8}} 
+\index{graphe\+::\+Graph@{graphe\+::\+Graph}!eulerian\+\_\+cycle@{eulerian\+\_\+cycle}}
+\index{eulerian\+\_\+cycle@{eulerian\+\_\+cycle}!graphe\+::\+Graph@{graphe\+::\+Graph}}
+\subsubsection{\texorpdfstring{eulerian\+\_\+cycle()}{eulerian\_cycle()}}
+{\footnotesize\ttfamily def graphe.\+Graph.\+eulerian\+\_\+cycle (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This method makes it possible to see if there is an Eulerian cycle or not, and if it exists, returns the cycle of arc corresponding to the Eulerian cycle.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classgraphe_1_1Graph_a6d0519dfdd5684ee06e5459703682e53}\label{classgraphe_1_1Graph_a6d0519dfdd5684ee06e5459703682e53}} 
+\index{graphe\+::\+Graph@{graphe\+::\+Graph}!is\+\_\+connected@{is\+\_\+connected}}
+\index{is\+\_\+connected@{is\+\_\+connected}!graphe\+::\+Graph@{graphe\+::\+Graph}}
+\subsubsection{\texorpdfstring{is\+\_\+connected()}{is\_connected()}}
+{\footnotesize\ttfamily def graphe.\+Graph.\+is\+\_\+connected (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This method verifies that the graph is connected. The algorithm used here is a DFS algorithm (in-depth search)
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classgraphe_1_1Graph_a9eae77f71af02fb458e27c17479dd326}\label{classgraphe_1_1Graph_a9eae77f71af02fb458e27c17479dd326}} 
+\index{graphe\+::\+Graph@{graphe\+::\+Graph}!making\+\_\+cycle@{making\+\_\+cycle}}
+\index{making\+\_\+cycle@{making\+\_\+cycle}!graphe\+::\+Graph@{graphe\+::\+Graph}}
+\subsubsection{\texorpdfstring{making\+\_\+cycle()}{making\_cycle()}}
+{\footnotesize\ttfamily def graphe.\+Graph.\+making\+\_\+cycle (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{start,  }\item[{}]{end,  }\item[{}]{edge\+\_\+visited }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This method searches for a cycle from a starting vertex and a vertex adjacent to the starting vertex (end).
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+graphe.\+py\end{DoxyCompactItemize}

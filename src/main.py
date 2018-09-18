@@ -35,7 +35,8 @@ if __name__ == "__main__":
             print("The length of a read can't be higher than the length of the genom")
             exit()
         genom_start,brujin_graph=genom.reads_to_kmers_graph(args.random_genom,args.length_reads,args.number_reads,args.length_kmers)
-        print("START GENOM :",genom_start)
+        #print("START GENOM :",genom_start)
+        print("LENGTH OF GENOM AT START :",len(genom_start))
         print("NUMBER OF EDGE : ",brujin_graph.number_edge)
     
     if args.with_genom!=None :

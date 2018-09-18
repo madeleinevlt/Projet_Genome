@@ -1,7 +1,7 @@
 #!/bin/bash
 START=$(date +%s.%N)
 
-python3 ../src/main.py 100 5000 13 -rd 10000 --with_check
+python3 ../src/main.py 100 5000 20 -rd 10000 --with_check
 
 TIME_JOB=$(date +%s.%N)
 
