@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # coding: utf-8
 
-import graphe 
+import graphe
 import genom_functions as genom
 import argparse
 
@@ -22,14 +22,14 @@ if __name__ == "__main__":
         print("You have to choose 1 option between --random_genom and --with_genom")
         exit()
 
-    if args.random_genom!=None and args.with_genom!=None :    
+    if args.random_genom!=None and args.with_genom!=None :
         print("You have to choose only 1 option between --random_genom and --with_genom")
         exit()
 
     if (args.length_kmers+1)>args.length_reads :
         print("The length of a kmer can't be equal or higher than the length of a read")
         exit()
-    
+
     if args.random_genom!=None :
         if args.length_reads>args.random_genom :
             print("The length of a read can't be higher than the length of the genom")
@@ -38,26 +38,25 @@ if __name__ == "__main__":
         #print("START GENOM :",genom_start)
         print("LENGTH OF GENOM AT START :",len(genom_start))
         print("NUMBER OF EDGE : ",brujin_graph.number_edge)
-    
+
     if args.with_genom!=None :
-        genom_start,brujin_graph=genom.reads_to_kmers_graph(args.with_genom,args.length_reads,args.number_reads,args.length_kmers)    
+        genom_start,brujin_graph=genom.reads_to_kmers_graph(args.with_genom,args.length_reads,args.number_reads,args.length_kmers)
 
     if not brujin_graph.is_connected() :
         print("Graph is not related")
         exit()
     else :
-        genom_result=brujin_graph.eulerian_cycle()  
+        genom_result=brujin_graph.eulerian_cycle()
         if args.output_file :
             outfile=args.output_file
         else :
             outfile="result.txt"
         with open(outfile,"w") as fillout :
-            fillout.write(genom_result)    
-              
-    
+            fillout.write(genom_result)
+
+
     if args.with_check :
         if genom.areRotations(genom_start, genom_result):
             print("The genom found with the program and the genom input are the same ")
         else:
             print("The genom found with the program and the genom input are not the same")
-

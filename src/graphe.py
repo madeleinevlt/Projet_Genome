@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # coding: utf-8
 import copy
-import random 
+import random
 class Graph() :
     """
     Initialization of a graph and its methods are regrouped here.
@@ -14,7 +14,7 @@ class Graph() :
         self.graph={}
         self.number_edge=0
 
-    def add_edge(self,vertex1,vertex2) : 
+    def add_edge(self,vertex1,vertex2) :
         """
         This method allows you to add a vertex in a graph
         """
@@ -22,7 +22,7 @@ class Graph() :
             if vertex2 not in self.graph[vertex1][1]  :
                 # outgoing arc for vertex1
                 self.graph[vertex1][1].append(vertex2)
-                self.number_edge=self.number_edge+1  
+                self.number_edge=self.number_edge+1
         else :
             self.graph[vertex1]=[[],[vertex2]]
             self.number_edge=self.number_edge+1
@@ -30,7 +30,7 @@ class Graph() :
         if vertex2 in self.graph :
             if vertex1 not in self.graph[vertex2][0]  :
                 # incoming arc for vertex2
-                self.graph[vertex2][0].append(vertex1)  
+                self.graph[vertex2][0].append(vertex1)
         else :
             self.graph[vertex2]=[[vertex1],[]]
 
@@ -44,7 +44,7 @@ class Graph() :
             genome=genome+all_tuples[1][:1]
         print("LENGTH OF GENOM BUILT :",len(genome))
         return genome
-        
+
     def is_connected(self) :
         """
         This method verifies that the graph is connected. The algorithm used here is a DFS algorithm (in-depth search)
@@ -52,6 +52,7 @@ class Graph() :
         vertex_visited=[]
         # I take a vertex at random (I take the first key of the list of keys)
         vertex_processing= copy.copy(self.graph[list(self.graph.keys())[0]][1])
+        #print(vertex_processing)
         while vertex_processing :
             v=vertex_processing.pop()
             if v not in vertex_visited :
@@ -60,8 +61,9 @@ class Graph() :
                     return False
                 for elem in self.graph[v][1] :
                     vertex_processing.append(elem)
+        print(len(vertex_visited))
         return(len(vertex_visited)==len(self.graph))
-    
+
     def making_cycle(self,start,end,edge_visited) :
         """
         This method searches for a cycle from a starting vertex and a vertex adjacent to the starting vertex (end).
@@ -85,9 +87,9 @@ class Graph() :
                         end=possible_next_step
                         edge_visited.append((start,end))
                         keep_going=True
-        return edge_visited                
-            
-    def eulerian_cycle(self) : 
+        return edge_visited
+
+    def eulerian_cycle(self) :
         """
         This method makes it possible to see if there is an Eulerian cycle or not, and if it exists, returns the cycle of arc corresponding to the Eulerian cycle.
         """
@@ -97,7 +99,8 @@ class Graph() :
             edge_out=self.graph[elem][1]
             if len(edge_in)!=len(edge_out):
                 print("ERREUR : THIS GRAPH DOES NOT CONTAIN AN EULERIAN CYCLE")
-                exit()
+                return 0
+                #exit()
 
         # research of the eulerian cycle
         start=list(self.graph.keys())[0]
@@ -120,7 +123,7 @@ class Graph() :
                         break
                 if found==True :
                     break
-            start=new_start 
+            start=new_start
             edge_visited_tmp=[]
             i=0
             edge_found=False
@@ -128,7 +131,7 @@ class Graph() :
             for edge in edge_visited :
                 if edge[0]==start :
                     edge_found=True
-                
+
                 if edge_found==True :
                     edge_visited_tmp.append(edge)
                 else :
@@ -146,7 +149,6 @@ class Graph() :
                     end = potential_end
                     break
             edge_visited.append((start,end))
-            edge_visited=self.making_cycle(start,end,edge_visited)                 
-                            
+            edge_visited=self.making_cycle(start,end,edge_visited)
+
         return self.build_genome(edge_visited)
-        
